@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>D* Lite Pathfinding</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <label for="rows">Rows:</label>
+      <input type="number" id="rows" min="2" max="100" value="10">
+      <label for="cols">Cols:</label>
+      <input type="number" id="cols" min="2" max="100" value="10">
+      <button onclick="setup_canvas()">Generate Map</button>
+      <hr>
+    </div>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script src="dstar.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

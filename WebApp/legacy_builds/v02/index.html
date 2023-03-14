@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>D* Path Finding with Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      // Define the size of each cell on the grid
+      const cellSize = 20;
+
+      // Define the map as a 2D array of cells
+      const map = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 1, 1, 0, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      ];
+
+      // Define the start and goal points
+      const start = { x: 2, y: 2 };
+      const goal = { x: 7, y: 7 };
+
+      // Define the D* path finding algorithm
+      function dStar(start, goal, map) {
+        // TODO: Implement the D* algorithm here
+        // For simplicity, this implementation just returns a direct line from start to goal
+        return [{ x: start.x, y: start.y }, { x: goal.x, y: goal.y }];
+      }
+
+      // Draw the map
+      function drawMap(map) {
+        ctx.fillStyle = 'black';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        for (let y = 0; y < map.length; y++) {
+          for (let x = 0; x < map[y].length; x++) {
+            if (map[y][x] === 0) {
+              ctx.fillStyle = 'white';
+              ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+            }
+          }
+        }
+      }
+
+    // Draw the path
+    function drawPath(path) {
+        ctx.strokeStyle = 'green';
+        ctx.lineWidth = cellSize / 2;
+        ctx.lineCap = 'round';
+
+        ctx.beginPath();
+        ctx.moveTo(path[0].x * cellSize + cellSize / 2, path[0].y * cellSize + cellSize / 2);
+
+        for (let i = 1; i < path.length; i++) {
+          ctx.lineTo(path[i].x * cellSize + cellSize / 2, path[i].y * cellSize + cellSize / 2);
+        }
+
+        ctx.stroke();
+      }
+    </script>
+    <script src="dstar.js"></script>
+    <script>
+
+      // Main function
+      function main() {
+        // Run the D* algorithm to get the path
+        const path = dStar(start, goal, map);
+
+        // Draw the map and the path
+        drawMap(map);
+        drawPath(path);
+      }
+
+      // Run the main function when the page loads
+      window.onload = main;
+    </script>
+  </body>
+</html>
+
